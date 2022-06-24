@@ -134,11 +134,11 @@ function randomUniqueN ( blackList , minN , maxN){
 
             //!se il numero generato non è incluso nella blackLIst allora il numero è valido 
             if(!blackList.includes(randomN)){
-                isValidN = true;
+                isValidN = true; 
             }
         }
-          //!pusho il risultato all'interno della blackList
-          blackList.push(randomN);  
+           //!pusho il risultato all'interno della blackList
+           blackList.push(randomN); 
     }
   //!ritorna il valore di del numero valido
          return randomN;

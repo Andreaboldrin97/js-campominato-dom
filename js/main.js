@@ -22,6 +22,9 @@ let conteinerScore = document.querySelector('#score');
 //? recupero la stringa del punteggio
 let scoreUser = document.querySelector('.score_box');
 
+//? recupero la stringa del reset-message
+let resetGameMessage = document.querySelector('#reset-game-message');
+
 //*creo l'array vuoto della blackList dei numeri randomici
 let blackListN = [];
 
@@ -46,6 +49,8 @@ btnPlay.addEventListener('click',function(){
    
     //!riporto la griglia ad attiva
     gridContainer.classList.remove("inactive");
+    scoreUser.classList.add(`d-none`);
+    resetGameMessage.classList.add(`d-none`);
 
     //?recupero il value dell'input del'user_choice
     let userChoice = document.getElementById('user_choice').value ;
@@ -149,6 +154,7 @@ function serialNumber (ncels , diff , listNrandom){
                         addToToggleClass(gridContainer,'inactive'); 
 
                         scoreUser.classList.remove(`d-none`);
+                        resetGameMessage.classList.remove(`d-none`);
                         
                         
                     } else{
@@ -168,6 +174,7 @@ function serialNumber (ncels , diff , listNrandom){
                         //?aggiungo la classe inactive  per rendere in attiva la griglia
                         addToToggleClass(gridContainer,'inactive'); 
                         scoreUser.classList.remove(`d-none`);
+                        resetGameMessage.classList.remove(`d-none`);
 
                     }
                 

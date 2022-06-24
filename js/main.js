@@ -28,7 +28,10 @@ btnPlay.addEventListener('click',function(){
 
     //?creo le due variabili di difficolta vuote
     let gridSize;
-    let difficult
+    let difficult;
+   
+    //!riporto la griglia ad attiva
+    gridContainer.classList.remove("inactive");
 
     //?recupero il value dell'input del'user_choice
     let userChoice = document.getElementById('user_choice').value ;
@@ -110,16 +113,21 @@ function serialNumber (ncels , diff , listNrandom){
             if(listNrandom.includes(i)){
                 //?aggiungo la classe box_bomb per il cambio colore
                 addToToggleClass(newBox,'box_bomb'); 
+
+                //se l'user prene una bomba
+                //?aggiungo la classe inactive  per rendere in attiva la griglia
+                addToToggleClass(gridContainer,'inactive'); 
+                
             } else{
                 //?aggiungo la classe box_active per il cambio colore
                 addToToggleClass(newBox,'box_active'); 
             }
 
-            //!chiamo la funzione del conteggio dei click
-            clickCount(newBox)
-
             //*stampo in console il numero dell'elemento selezionato
             console.log(`hai clicccato l'elemento ${i}`);
+            let scoreBox = document.querySelectorAll('.box_active');
+            console.log(scoreBox);
+            conteinerScore.innerHTML= scoreBox.length;
         }
         //! aggiunta parametro di .addEventListener per non rendere piu cliccabile un elemento
         , {once: true});
@@ -133,18 +141,11 @@ function addToToggleClass(elemnt , className){
 }
 
 //*creo la funzione per la fine del gioco
-//se l'user prene una bomba
-//se l'user clicca ogni casella che non sia una bomba
-//* creo la funzione del contatore
-function clickCount (clickon){
-   
-    //inizializo il click a 0
-    clickon= 0;
-    //sommo al click il valore di click +1
-    clickon= clickon + 1;
 
-     conteinerScore.innerHTML= clickon;
-}
+//se l'user clicca ogni casella che non sia una bomba
+
+
+
 
 
 //*creo la funzione per generare Nrandom 

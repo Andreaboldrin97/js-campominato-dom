@@ -52,3 +52,8 @@ main{
     background-color: white;
     padding: 2px 10px;
 }
+/* classe per rendere inactive la griglia */
+.inactive {
+    pointer-events: none;
+    cursor: default;
+}

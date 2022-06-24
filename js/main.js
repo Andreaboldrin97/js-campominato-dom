@@ -19,6 +19,9 @@ let gridContainer = document.querySelector('.grid_container');
 //? recupero il parent di dove voglio inserire lo score del punteggio creati
 let conteinerScore = document.querySelector('#score');
 
+//? recupero la stringa del punteggio
+let scoreUser = document.querySelector('.score_box');
+
 //*creo l'array vuoto della blackList dei numeri randomici
 let blackListN = [];
 
@@ -144,6 +147,9 @@ function serialNumber (ncels , diff , listNrandom){
                         //se l'user prene una bomba
                         //?aggiungo la classe inactive  per rendere in attiva la griglia
                         addToToggleClass(gridContainer,'inactive'); 
+
+                        scoreUser.classList.remove(`d-none`);
+                        
                         
                     } else{
                         //?aggiungo la classe box_active per il cambio colore
@@ -156,13 +162,13 @@ function serialNumber (ncels , diff , listNrandom){
                     let scoreBox = document.querySelectorAll('.box_active');
                     // console.log(scoreBox);
                     //il punteggio sarà della lunghezza degli elementi con classe box_active
-                    conteinerScore.innerHTML= scoreBox.length;
+                    conteinerScore.innerHTML= (`${scoreBox.length} su ${minPointsToWin}`);
                     console.log(minPointsToWin);
                     if(minPointsToWin == scoreBox.length){
                         //?aggiungo la classe inactive  per rendere in attiva la griglia
                         addToToggleClass(gridContainer,'inactive'); 
-                        alert(`Hai vinto bravo il tuo punteggio è ${scoreBox.length} su ${minPointsToWin}`);
-                        alert(`premi play per rigiocare`);
+                        scoreUser.classList.remove(`d-none`);
+
                     }
                 
                 }

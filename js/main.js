@@ -125,8 +125,10 @@ function serialNumber (ncels , diff , listNrandom){
 
             //*stampo in console il numero dell'elemento selezionato
             console.log(`hai clicccato l'elemento ${i}`);
+            //prendo tutti gli elementi creati con classe active per sapere quanti sono
             let scoreBox = document.querySelectorAll('.box_active');
             console.log(scoreBox);
+            //il punteggio sarà della lunghezza degli elementi con classe box_active
             conteinerScore.innerHTML= scoreBox.length;
         }
         //! aggiunta parametro di .addEventListener per non rendere piu cliccabile un elemento

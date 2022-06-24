@@ -23,38 +23,46 @@ let conteinerScore = document.querySelector('#score');
 let blackListN = [];
 
 
+
+
+
+
+
+
+
+
+
+
 //*creo addEvenLIsener sul btn
 btnPlay.addEventListener('click',function(){
 
     //?creo le due variabili di difficolta vuote
     let gridSize;
     let difficult;
+    let  minPointsToWin;
    
     //!riporto la griglia ad attiva
     gridContainer.classList.remove("inactive");
 
     //?recupero il value dell'input del'user_choice
     let userChoice = document.getElementById('user_choice').value ;
-    console.log(userChoice)
+    // console.log(userChoice)
 
  //! if sulla scelta del cliente
 if(userChoice === 'hard'){
     //!numero di caselle
    gridSize = 49;
-   difficult = 'hard'
-  
-
+   difficult = 'hard';
 }else if(userChoice === 'medium'){
     //!numero di caselle
    gridSize = 81;
-   difficult = 'medium'
-
+   difficult = 'medium';
 }else{
     //!numero di caselle
    gridSize = 100;
-   difficult = 'easy'
+   difficult = 'easy';
 }
-console.log(gridSize);
+ console.log(gridSize);
 
 //!dichiaro la blackListN vuota in modo che ogni volta che premo play non si sovrascrive ma ne genera una nuova
     blackListN=[];
@@ -72,6 +80,17 @@ serialNumber(gridSize , difficult , blackListN);
 } )
 
 
+
+
+
+
+
+
+
+
+
+
+
 //!creo la funzione del cilo piu la creazione di un elemento div     
 function serialNumber (ncels , diff , listNrandom){
 
@@ -82,6 +101,10 @@ function serialNumber (ncels , diff , listNrandom){
     //!svuoto il contenitore dell'html in modo che ogno volta che premo play
     //!svuota il contenuto senza sovrascriverlo 
     conteinerScore.innerHTML= '';
+
+
+
+
 
     //?creo un ciclo for iniziannizandolo a 0 fino 
     for(let i = 1 ; i <= ncels ; i++){
@@ -94,57 +117,69 @@ function serialNumber (ncels , diff , listNrandom){
          //? dichiaro l'elemento creato al valore di i
         newBox.innerHTML = i;
 
-        //!in base alla difficolta si aggiunge una classe relativa alla grandezza dei box
-        if( diff == 'hard'){
-            newBox.classList.add('box','box_hard');
-         }else if(diff  == 'medium'){
-            newBox.classList.add('box','box_medium');
-         
-         }else{
-            
-         }
-        //?importo l'elemento creato
-        gridContainer.append(newBox);
-
-        //? creo l'evento al clik dei box creati
-        newBox.addEventListener('click',function(){
-            //!creiamo la bomba 
-            //se i è incluso nella lista dei numeri random alllora
-            if(listNrandom.includes(i)){
-                //?aggiungo la classe box_bomb per il cambio colore
-                addToToggleClass(newBox,'box_bomb'); 
-
-                //se l'user prene una bomba
-                //?aggiungo la classe inactive  per rendere in attiva la griglia
-                addToToggleClass(gridContainer,'inactive'); 
+            //!in base alla difficolta si aggiunge una classe relativa alla grandezza dei box
+            if( diff == 'hard'){
+                newBox.classList.add('box','box_hard');
+                minPointsToWin = 33;
                 
-            } else{
-                //?aggiungo la classe box_active per il cambio colore
-                addToToggleClass(newBox,'box_active'); 
+            }else if(diff  == 'medium'){
+                newBox.classList.add('box','box_medium');
+                minPointsToWin = 65;
+            }else{
+                minPointsToWin = 84;
             }
+            //?importo l'elemento creato
+            gridContainer.append(newBox);
 
-            //*stampo in console il numero dell'elemento selezionato
-            console.log(`hai clicccato l'elemento ${i}`);
-            //prendo tutti gli elementi creati con classe active per sapere quanti sono
-            let scoreBox = document.querySelectorAll('.box_active');
-            console.log(scoreBox);
-            //il punteggio sarà della lunghezza degli elementi con classe box_active
-            conteinerScore.innerHTML= scoreBox.length;
+
+
+                //? creo l'evento al clik dei box creati
+                newBox.addEventListener('click',function(){
+                    //!creiamo la bomba 
+                    //se i è incluso nella lista dei numeri random alllora
+                    if(listNrandom.includes(i)){
+                        //?aggiungo la classe box_bomb per il cambio colore
+                        addToToggleClass(newBox,'box_bomb'); 
+
+                        //se l'user prene una bomba
+                        //?aggiungo la classe inactive  per rendere in attiva la griglia
+                        addToToggleClass(gridContainer,'inactive'); 
+                        
+                    } else{
+                        //?aggiungo la classe box_active per il cambio colore
+                        addToToggleClass(newBox,'box_active'); 
+                    }
+
+                    //*stampo in console il numero dell'elemento selezionato
+                    // console.log(`hai clicccato l'elemento ${i}`);
+                    //prendo tutti gli elementi creati con classe active per sapere quanti sono
+                    let scoreBox = document.querySelectorAll('.box_active');
+                    // console.log(scoreBox);
+                    //il punteggio sarà della lunghezza degli elementi con classe box_active
+                    conteinerScore.innerHTML= scoreBox.length;
+                    console.log(minPointsToWin);
+                    if(minPointsToWin == scoreBox.length){
+                        //?aggiungo la classe inactive  per rendere in attiva la griglia
+                        addToToggleClass(gridContainer,'inactive'); 
+                        alert(`Hai vinto bravo il tuo punteggio è ${scoreBox.length} su ${minPointsToWin}`);
+                        alert(`premi play per rigiocare`);
+                    }
+                
+                }
+                //! aggiunta parametro di .addEventListener per non rendere piu cliccabile un elemento
+                , {once: true});
+            }
         }
-        //! aggiunta parametro di .addEventListener per non rendere piu cliccabile un elemento
-        , {once: true});
-        
-    }
-}
+
+
+
+
+
 
 //* creo la funzone toggle per aggiungere o rimuovere una classe
 function addToToggleClass(elemnt , className){
     elemnt.classList.toggle(className);
 }
-
-//*creo la funzione per la fine del gioco
-
-//se l'user clicca ogni casella che non sia una bomba
 
 
 
@@ -170,7 +205,5 @@ function randomUniqueN ( blackList , minN , maxN){
            //!pusho il risultato all'interno della blackList
            blackList.push(randomN); 
 
-             //!ritorna il valore di del numero valido
-         return randomN;
 
     }

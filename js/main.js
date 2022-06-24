@@ -17,7 +17,7 @@ let btnPlay = document.getElementById('play_btn');
 let gridContainer = document.querySelector('.grid_container');
 
 //? recupero il parent di dove voglio inserire lo score del punteggio creati
-let conteinerScore = document.querySelector('#conteiner_score');
+let conteinerScore = document.querySelector('#score');
 
 //*creo l'array vuoto della blackList dei numeri randomici
 let blackListN = [];
@@ -143,17 +143,7 @@ function clickCount (clickon){
     //sommo al click il valore di click +1
     clickon= clickon + 1;
 
-     //? creo l'elemto da inportare nell'html
-     let score =document.createElement('h3');
-
-     //?gli assegno la classe che voglio inportare
-     score.classList.add('score_box');
-
-      //? dichiaro l'elemento creato al valore di i
-     score.innerHTML = `punteggio: ${clickon}`;
-
-    //?importo l'elemento creato
-    conteinerScore.append(score);
+     conteinerScore.innerHTML= clickon;
 }
 
 

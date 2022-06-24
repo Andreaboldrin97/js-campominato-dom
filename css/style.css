@@ -32,7 +32,7 @@ main{
 }
 .box_bomb{
     background-color: rgb(249, 4, 4);
-    box-shadow: none;
+   
 }
 /* box in base al livello */
 .box_medium{
@@ -43,4 +43,12 @@ main{
 .box_hard{
     width: calc(100% / 7);
     height: calc(100% / 7);
+}
+
+/* box score */
+.score_box{
+    border: 2px solid black;
+    border-radius: 15px;
+    background-color: white;
+    padding: 2px 10px;
 }

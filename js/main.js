@@ -1,10 +1,4 @@
-// Consegna
-// Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco
-// (attenzione: non bisogna copiare tutta la cartella dell'esercizio ma solo l'index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l'inizializzazione di git).
-// Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
-// Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
-// In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina.
-// Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+
 // La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba
 
@@ -19,8 +13,11 @@
 //*recupero il buttun dal dom e lo assoccio ad una variabile
 let btnPlay = document.getElementById('play_btn');
 
-//? recupero il parent di dove voglio inserire gli elementi creati
+//? recupero il parent di dove voglio inserire i box creati
 let gridContainer = document.querySelector('.grid_container');
+
+//? recupero il parent di dove voglio inserire lo score del punteggio creati
+let conteinerScore = document.querySelector('#conteiner_score');
 
 //*creo l'array vuoto della blackList dei numeri randomici
 let blackListN = [];
@@ -79,6 +76,10 @@ function serialNumber (ncels , diff , listNrandom){
     //!svuota il contenuto senza sovrascriverlo 
     gridContainer.innerHTML= '';
 
+    //!svuoto il contenitore dell'html in modo che ogno volta che premo play
+    //!svuota il contenuto senza sovrascriverlo 
+    conteinerScore.innerHTML= '';
+
     //?creo un ciclo for iniziannizandolo a 0 fino 
     for(let i = 1 ; i <= ncels ; i++){
         //? creo l'elemto da inportare nell'html
@@ -114,6 +115,8 @@ function serialNumber (ncels , diff , listNrandom){
                 addToToggleClass(newBox,'box_active'); 
             }
 
+            //!chiamo la funzione del conteggio dei click
+            clickCount(newBox[i])
 
             //*stampo in console il numero dell'elemento selezionato
             console.log(`hai clicccato l'elemento ${i}`);
@@ -127,6 +130,30 @@ function serialNumber (ncels , diff , listNrandom){
 //* creo la funzone toggle per aggiungere o rimuovere una classe
 function addToToggleClass(elemnt , className){
     elemnt.classList.toggle(className);
+}
+
+//*creo la funzione per la fine del gioco
+//se l'user prene una bomba
+//se l'user clicca ogni casella che non sia una bomba
+//* creo la funzione del contatore
+function clickCount (clickon){
+   
+    //inizializo il click a 0
+    clickon= 0;
+    //sommo al click il valore di click +1
+    clickon= clickon + 1;
+
+     //? creo l'elemto da inportare nell'html
+     let score =document.createElement('h3');
+
+     //?gli assegno la classe che voglio inportare
+     score.classList.add('score_box');
+
+      //? dichiaro l'elemento creato al valore di i
+     score.innerHTML = `punteggio: ${clickon}`;
+
+    //?importo l'elemento creato
+    conteinerScore.append(score);
 }
 
 

@@ -1,0 +1,42 @@
+header{
+    height: 120px;
+}
+img{
+    width: 100px;
+}
+main{
+    background-color: rgb(184, 184, 185);
+}
+.grid_container{
+    background-color: rgb(240, 240, 240);
+    margin: 0 auto;
+    width: 650px;
+    height: 650px;
+}
+.box{
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    display: flex;
+    border: 2px solid white;
+    cursor: pointer;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 10px #000000;;
+}
+
+.box_active{
+    background-color: rgb(198, 192, 192);
+    box-shadow: none;
+}
+/* box in base al livello */
+.box_medium{
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+.box_hard{
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}

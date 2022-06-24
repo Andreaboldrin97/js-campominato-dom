@@ -30,6 +30,10 @@ main{
     background-color: rgb(198, 192, 192);
     box-shadow: none;
 }
+.box_bomb{
+    background-color: rgb(249, 4, 4);
+    box-shadow: none;
+}
 /* box in base al livello */
 .box_medium{
     width: calc(100% / 9);

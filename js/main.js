@@ -56,9 +56,6 @@ if(userChoice === 'hard'){
 }
 console.log(gridSize);
 
-//!chiamo la funzione con i paremetri che voglio inserire
-    serialNumber(gridSize , difficult);
-
 //!dichiaro la blackListN vuota in modo che ogni volta che premo play non si sovrascrive ma ne genera una nuova
     blackListN=[];
 
@@ -68,12 +65,15 @@ console.log(gridSize);
         randomUniqueN(blackListN , 1 , gridSize)
     }
     console.log(blackListN)
+
+//!chiamo la funzione con i paremetri che voglio inserire
+serialNumber(gridSize , difficult , blackListN);
     
 } )
 
 
 //!creo la funzione del cilo piu la creazione di un elemento div     
-function serialNumber (ncels , diff ){
+function serialNumber (ncels , diff , listNrandom){
 
     //!svuoto il contenitore dell'html in modo che ogno volta che premo play
     //!svuota il contenuto senza sovrascriverlo 
@@ -104,9 +104,16 @@ function serialNumber (ncels , diff ){
 
         //? creo l'evento al clik dei box creati
         newBox.addEventListener('click',function(){
+            //!creiamo la bomba 
+            //se i è incluso nella lista dei numeri random alllora
+            if(listNrandom.includes(i)){
+                //?aggiungo la classe box_bomb per il cambio colore
+                addToToggleClass(newBox,'box_bomb'); 
+            } else{
+                //?aggiungo la classe box_active per il cambio colore
+                addToToggleClass(newBox,'box_active'); 
+            }
 
-            //?aggiungo la classe box_active per il cambio colore
-            addToToggleClass(newBox,'box_active'); 
 
             //*stampo in console il numero dell'elemento selezionato
             console.log(`hai clicccato l'elemento ${i}`);

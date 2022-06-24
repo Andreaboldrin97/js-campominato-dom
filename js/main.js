@@ -1,14 +1,35 @@
+// Consegna
+// Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco
+// (attenzione: non bisogna copiare tutta la cartella dell'esercizio ma solo l'index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l'inizializzazione di git).
+// Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
+// Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
+// In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina.
+// Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+// La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+// Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba
+
+//* variabili create scoop globale
+//? variabili create scoop locale 
+//! if , richiami function 
+//!commenti personali all'interno 
+
+
+
+
 //*recupero il buttun dal dom e lo assoccio ad una variabile
 let btnPlay = document.getElementById('play_btn');
 
 //? recupero il parent di dove voglio inserire gli elementi creati
 let gridContainer = document.querySelector('.grid_container');
 
+//*creo l'array vuoto della blackList dei numeri randomici
+let blackListN = [];
+
 
 //*creo addEvenLIsener sul btn
 btnPlay.addEventListener('click',function(){
 
-    //*creo le due variabili di difficolta vuote
+    //?creo le due variabili di difficolta vuote
     let gridSize;
     let difficult
 
@@ -38,6 +59,10 @@ console.log(gridSize);
 //!chiamo la funzione con i paremetri che voglio inserire
     serialNumber(gridSize , difficult);
 
+//! chiamo la funzione per generare i numeri
+    randomUniqueN ( blackListN , 1 , gridSize)
+  
+    console.log(blackListN)
     
 } )
 
@@ -87,7 +112,34 @@ function serialNumber (ncels , diff ){
     }
 }
 
-//? creo la funzone toggle per aggiungere o rimuovere una classe
+//* creo la funzone toggle per aggiungere o rimuovere una classe
 function addToToggleClass(elemnt , className){
     elemnt.classList.toggle(className);
+}
+
+
+//*creo la funzione per generare Nrandom 
+function randomUniqueN ( blackList , minN , maxN){
+    
+    //? creo un variabile vuota per il numero e una per la validita 
+    //!la var della validità la indico come falsa 
+    let randomN ;
+    let isValidN = false ;
+    //? creo un ciclo for per indentificare il numero di numeri da creare
+    for(let i = 1 ; i <= maxN ; i++){
+         //? creo un ciclo while per far in modo di chiedere un numero non presente nella blackLIst
+        while (isValidN === false){
+            //? associo la var randomN alla formula del numero randomico
+            randomN = Math.floor(Math.random()*(maxN - minN + 1) + minN);
+
+            //!se il numero generato non è incluso nella blackLIst allora il numero è valido 
+            if(!blackList.includes(randomN)){
+                isValidN = true;
+            }
+        }
+          //!pusho il risultato all'interno della blackList
+          blackList.push(randomN);  
+    }
+  //!ritorna il valore di del numero valido
+         return randomN;
 }

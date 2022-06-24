@@ -59,9 +59,11 @@ console.log(gridSize);
 //!chiamo la funzione con i paremetri che voglio inserire
     serialNumber(gridSize , difficult);
 
-//! chiamo la funzione per generare i numeri
-    randomUniqueN ( blackListN , 1 , gridSize)
-  
+//?creo un ciclo per creare 16 Nrandom
+    for(let i = 1 ; i <= 16 ; i++){
+        //! chiamo la funzione per generare i numeri random in base alla grandezza della gridSize
+        randomUniqueN(blackListN , 1 , gridSize)
+    }
     console.log(blackListN)
     
 } )
@@ -125,12 +127,10 @@ function randomUniqueN ( blackList , minN , maxN){
     //!la var della validità la indico come falsa 
     let randomN ;
     let isValidN = false ;
-    //? creo un ciclo for per indentificare il numero di numeri da creare
-    for(let i = 1 ; i <= maxN ; i++){
          //? creo un ciclo while per far in modo di chiedere un numero non presente nella blackLIst
         while (isValidN === false){
             //? associo la var randomN alla formula del numero randomico
-            randomN = Math.floor(Math.random()*(maxN - minN + 1) + minN);
+            randomN = Math.floor(Math.random()*(maxN + 1) + minN);
 
             //!se il numero generato non è incluso nella blackLIst allora il numero è valido 
             if(!blackList.includes(randomN)){
@@ -139,7 +139,8 @@ function randomUniqueN ( blackList , minN , maxN){
         }
            //!pusho il risultato all'interno della blackList
            blackList.push(randomN); 
-    }
-  //!ritorna il valore di del numero valido
+
+             //!ritorna il valore di del numero valido
          return randomN;
-}
+
+    }

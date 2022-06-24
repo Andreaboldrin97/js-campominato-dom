@@ -116,7 +116,7 @@ function serialNumber (ncels , diff , listNrandom){
             }
 
             //!chiamo la funzione del conteggio dei click
-            clickCount(newBox[i])
+            clickCount(newBox)
 
             //*stampo in console il numero dell'elemento selezionato
             console.log(`hai clicccato l'elemento ${i}`);

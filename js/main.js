@@ -25,6 +25,11 @@ let scoreUser = document.querySelector('.score_box');
 //? recupero la stringa del reset-message
 let resetGameMessage = document.querySelector('#reset-game-message');
 
+//? recupero la stringa del messagio del risultato della partita per l'user
+let outcome = document.querySelector('#outcome');
+
+
+
 //*creo l'array vuoto della blackList dei numeri randomici
 let blackListN = [];
 
@@ -154,9 +159,8 @@ function serialNumber (ncels , diff , listNrandom){
                         addToToggleClass(gridContainer,'inactive'); 
 
                         scoreUser.classList.remove(`d-none`);
-                        resetGameMessage.classList.remove(`d-none`);
-                        
-                        
+                        resetGameMessage.classList.remove(`d-none`);  
+                        outcome.innerHTML=(`mi dispiace hai perso`);
                     } else{
                         //?aggiungo la classe box_active per il cambio colore
                         addToToggleClass(newBox,'box_active'); 
@@ -175,13 +179,14 @@ function serialNumber (ncels , diff , listNrandom){
                         addToToggleClass(gridContainer,'inactive'); 
                         scoreUser.classList.remove(`d-none`);
                         resetGameMessage.classList.remove(`d-none`);
-
+                        outcome.innerHTML=(`wow hai vinto`);
                     }
                 
                 }
                 //! aggiunta parametro di .addEventListener per non rendere piu cliccabile un elemento
                 , {once: true});
             }
+
         }
 
 
@@ -220,3 +225,6 @@ function randomUniqueN ( blackList , minN , maxN){
 
 
     }
+
+
+  
